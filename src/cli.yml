@@ -1,8 +1,12 @@
 name: basic_compressor
 version: "1.0"
 author: Quang Tran <tquang1708@gmail.com>
-about: Basic compressor for Info Theory Finals. Using LZW followed by Huffman.
+about: Basic compressor/decompressor for Info Theory Finals. Using LZW followed by Huffman. Compresses in place by default.
 args:
+    - decompress:
+        short: d
+        long: decompress
+        help: Decompresses file.
     - INPUT:
-        help: Determines the file to compress
+        help: Determine the file to compress/decompress
         required: true
