@@ -1,0 +1,8 @@
+name: basic_compressor
+version: "1.0"
+author: Quang Tran <tquang1708@gmail.com>
+about: Basic compressor for Info Theory Finals. Using LZW followed by Huffman.
+args:
+    - INPUT:
+        help: Determines the file to compress
+        required: true
