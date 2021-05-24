@@ -15,14 +15,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if !matches.is_present("decompress") {
         println!("Compressing file {}...", input_str);
 
-        let lzw_output = lzw::lzw_compress(input)?;
+        let lzw_output = lzw::lzw_encode(input)?;
         fs::write(input_str.to_owned() + ".compressed", lzw_output)?;
 
         println!("Done");
     } else {
         println!("Decompressing file {}...", input_str);
 
-        let lzw_output = lzw::lzw_decompress(input)?;
+        let lzw_output = lzw::lzw_decode(input)?;
         fs::write(input_str.to_owned() + ".decompressed", lzw_output)?;
 
         println!("Done");
