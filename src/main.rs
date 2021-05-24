@@ -3,6 +3,8 @@ extern crate clap;
 use clap::App;
 use std::fs;
 
+mod lzw;
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let yaml = load_yaml!("cli.yml");
     let matches = App::from_yaml(yaml).get_matches();
@@ -10,12 +12,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let input_str = matches.value_of("INPUT").unwrap();
     let input = fs::read(input_str)?;
 
-    // TODO: implement compress/decompress as separate modules in different files
-    if matches.is_present("decompress") {
-        println!("Decompressing file {}...", input_str);
+    if !matches.is_present("decompress") {
+        println!("Compressing file {}...", input_str);
+
+        let lzw_output = lzw::lzw_compress(input)?;
+        fs::write(input_str.to_owned() + ".compressed", lzw_output)?;
+
         println!("Done");
     } else {
-        println!("Compressing file {}...", input_str);
+        println!("Decompressing file {}...", input_str);
+
+        let lzw_output = lzw::lzw_decompress(input)?;
+        fs::write(input_str.to_owned() + ".decompressed", lzw_output)?;
+
         println!("Done");
     }
 
