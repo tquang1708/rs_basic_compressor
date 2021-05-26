@@ -159,7 +159,7 @@ pub fn lzw_decode(input: Vec<u8>) -> Result<Vec<u8>, Box<dyn std::error::Error>>
 // https://www.cplusplus.com/articles/iL18T05o/
 fn default_encode_dict() -> HashMap<Vec<u8>, u16> {
     let mut out = HashMap::new();
-    for i in 0..255 {
+    for i in 0..=255 {
         out.insert(vec![i], i as u16);
     };
     out
@@ -167,7 +167,7 @@ fn default_encode_dict() -> HashMap<Vec<u8>, u16> {
 
 fn default_decode_dict() -> HashMap<u16, Vec<u8>> {
     let mut out = HashMap::new();
-    for i in 0..255 {
+    for i in 0..=255 {
         out.insert(i as u16, vec![i]);
     };
     out
